@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique @db.VarChar(30)
+  userName  String   @unique @db.VarChar(30)
+  password  String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  videos Video[]
+}
+
+model Video {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(255)
+  caption   String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User     User @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  hashtags Hashtag[]
+  // User와 hashTags는 실제 DB에 저장되지 않음
+
+  Artist Artist @relation(fields: [artist], references: [artist])
+  artist String
+
+
+  // https://blog.joon-lab.com/143
+  // 1:1 관계는 모델을 분리 안해도 될듯함
+  attachment    String
+  attachmentUrl String
+}
+
+// Video와 N:M 관계
+model Hashtag {
+  id Int @id @default(autoincrement())
+
+  hashtag String @unique
+
+  videos Video[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Video : Artist - N:1
+model Artist {
+  id     Int    @id @default(autoincrement())
+  artist String @unique
+
+  videos Video[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

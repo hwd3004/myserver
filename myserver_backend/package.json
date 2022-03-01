@@ -1,0 +1,41 @@
+{
+  "name": "myserver_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc-watch --onSuccess \"nodemon ./dist/index.js\"",
+    "mig": "npx prisma migrate dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^3.9.2",
+    "apollo-server-express": "^3.6.3",
+    "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "graphql": "^16.3.0",
+    "graphql-upload": "^13.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.2",
+    "@graphql-tools/schema": "^8.3.1",
+    "@types/bcrypt": "^5.0.0",
+    "@types/compression": "^1.7.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/graphql": "^14.5.0",
+    "@types/graphql-upload": "^8.0.10",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/morgan": "^1.9.3",
+    "prisma": "^3.9.2",
+    "tsc-watch": "^4.6.0"
+  }
+}
